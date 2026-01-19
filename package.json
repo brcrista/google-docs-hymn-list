@@ -1,0 +1,11 @@
+{
+  "name": "google-docs-hymn-list",
+  "version": "1.0.0",
+  "description": "Google Docs add-on for working with hymn lists for St. Paul the Apostle's (NYC) music ministry",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Brian Cristante",
+  "license": "MIT"
+}
