@@ -32,6 +32,9 @@ function exportToFourscore() {
   const title = document.getName();
   const table = loadHymnTable(document);
   const propers = readPropers(table);
-  const contents = forscoreSetlist([title, ...propers, "Mass Parts"]);
-  DriveApp.createFile(`${title}.4ss`, contents);
+  const blob = forscoreSetlist(
+    [title, ...propers, "Mass Parts"],
+    `${title}.4ss`
+  );
+  DriveApp.createFile(blob);
 }
