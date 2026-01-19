@@ -86,6 +86,23 @@ function bplist(setlist) {
 }
 
 function gzip(text) {
-  // TODO compress with gzip
-  return text;
+  const compressedStream = ReadableStream
+    .from([text])
+    .pipeThrough(new CompressionStream("gzip"));
+
+  const reader = compressedStream.getReader();
+  let finishedStreaming = false;
+  let result = "";
+
+  while (!finishedStreaming) {
+    reader.read().then(function (done, value) {
+      if (done) {
+        finishedStreaming = true;
+      } else {
+        result += value;
+      }
+    });
+
+    return result;
+  }
 }
