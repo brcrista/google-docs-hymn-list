@@ -1,3 +1,9 @@
+/**
+ * .4ss files are a gzipped binary plist.
+ * To see this for a file setlist.4ss, run on macOS:
+ *   $ gunzip setlist.4ss --keep --suffix .4ss
+ *   $ file setlist
+ */
 export function pdfFilesInBlob(blob) {
   const bplist = Utilities.ungzip(blob);
   const dataAsUtf8 = bplist.getDataAsString();
