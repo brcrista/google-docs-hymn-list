@@ -23,21 +23,19 @@ function onOpen(e) {
 }
 
 function importFromForscore() {
-  // TODO make the name configurable
-  const files = DriveApp.getFilesByName("Jan18.4ss");
-  const file = getFirstFile(files);
+  const document = DocumentApp.getActiveDocument();
+  const forscoreFile = `${document.getName()}.4ss`;
+  const files = DriveApp.getFilesByName(forscoreFile);
+  if (!files.hasNext()) {
+    throw new Error(
+        `Could not find a file in this Google Drive with the name '${forscoreFile}'`
+    );
+  }
+
+  const file = files.next();
   const blob = file.getBlob();
   const pdfFiles = pdfFilesInBlob(blob);
   const titles = guessTitles(pdfFiles);
-  const document = DocumentApp.getActiveDocument();
   const hymnTable = loadHymnTable(document);
   insertHymns(hymnTable, titles);
 }
-
-function getFirstFile(files) {
-  if (!files.hasNext()) {
-    throw Error("no file");
-  }
-  return files.next();
-}
-
